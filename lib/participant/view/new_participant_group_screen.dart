@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taf/participant/data/participant_group_list.dart';
 import 'package:taf/participant/models/participant_group.dart';
 import 'package:taf/participant/models/participant.dart';
 import 'package:taf/participant/data/participant_list.dart';
@@ -32,7 +34,7 @@ class _NewParticipantScreenState extends State<NewParticipantGroupScreen> {
       .toList();
 
   void cancel() {
-    Navigator.of(context).pop(null);
+    Navigator.of(context).pop();
   }
 
   void submit() {
@@ -40,8 +42,10 @@ class _NewParticipantScreenState extends State<NewParticipantGroupScreen> {
       return;
     }
     if (formKey.currentState!.validate() && selected.isNotEmpty) {
-      Navigator.of(context).pop<ParticipantGroup>(
-          ParticipantGroup(groupName: nameController.text, subjectList: selected));
+      final newGroup = ParticipantGroup(groupName: nameController.text, subjectList: selected);
+      Provider.of<GroupNotifier>(context, listen: false).addGroup(newGroup);
+
+      Navigator.of(context).pop<ParticipantGroup>(newGroup);
     }
   }
 
@@ -149,9 +153,15 @@ class ParticipantSelectionItem extends StatelessWidget {
       title: Text(data.name),
       trailing: IconButton(
           onPressed: () => onChange(data, !bSelected),
-          icon: bSelected ?
-            const Icon(Icons.close, color: Colors.red,) :
-            const Icon(Icons.add, color:  Colors.green,)),
+          icon: bSelected
+              ? const Icon(
+                  Icons.close,
+                  color: Colors.red,
+                )
+              : const Icon(
+                  Icons.add,
+                  color: Colors.green,
+                )),
     );
   }
 }

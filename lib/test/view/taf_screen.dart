@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taf/test/sprint/view/sprint_tab.dart';
 
 class TAFScreen extends StatefulWidget {
   const TAFScreen({super.key});
@@ -19,7 +20,6 @@ class _TAFScreenState extends State<TAFScreen> with AutomaticKeepAliveClientMixi
 
   @override
   void initState() {
-    print('TAF Screen key: ${widget.key} -----------------------------');
     tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
@@ -52,7 +52,7 @@ class _TAFScreenState extends State<TAFScreen> with AutomaticKeepAliveClientMixi
           ),
           Expanded(
               child: TabBarView(controller: tabController, children: const [
-            Center(child: Text('Corrida')),
+            SprintTab(),
             Center(child: Text('Natação')),
             Center(child: Text('Permanência')),
           ])),

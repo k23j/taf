@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taf/participant/view/participant_group_screen.dart';
 import 'package:taf/participant/view/participant_screen.dart';
-import 'package:taf/test/taf_screen.dart';
+import 'package:taf/test/view/taf_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,16 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey tafScreenKey = GlobalKey();
-  late Widget tafScreen;
-
   static int currentScreenId = 0;
-
-  @override
-  void initState() {
-    tafScreen = TAFScreen(key: tafScreenKey);
-    super.initState();
-  }
 
   void changeScreen(int index) {
     setState(() {
@@ -31,16 +22,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Home'),
-      // ),
-      // body: <Widget>[],
       body: IndexedStack(
         index: currentScreenId,
-        children: [
-          tafScreen,
-          const ParticipantGroupScreen(),
-          const ParticipantScreen(),
+        children: const [
+          TAFScreen(),
+          ParticipantGroupScreen(),
+          ParticipantScreen(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
