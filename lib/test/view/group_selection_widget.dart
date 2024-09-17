@@ -5,9 +5,9 @@ import 'package:taf/participant/models/participant_group.dart';
 import 'package:taf/participant/view/new_participant_group_screen.dart';
 
 class GroupSelectionWidget extends StatefulWidget {
-  const GroupSelectionWidget({required this.onGroupSelec, super.key});
+  const GroupSelectionWidget({required this.onGroupSelect, super.key});
 
-  final Function(ParticipantGroup? group) onGroupSelec;
+  final Function(ParticipantGroup? group) onGroupSelect;
 
   @override
   State<GroupSelectionWidget> createState() => _GroupSelectionWidgetState();
@@ -29,6 +29,9 @@ class _GroupSelectionWidgetState extends State<GroupSelectionWidget> {
       });
     }
 
+    widget.onGroupSelect(selectedGroup);
+
+
     return newGroup;
   }
 
@@ -42,6 +45,8 @@ class _GroupSelectionWidgetState extends State<GroupSelectionWidget> {
     setState(() {
       this.selectedGroup = selectedGroup;
     });
+
+    widget.onGroupSelect(this.selectedGroup);
   }
 
   // @override
@@ -62,13 +67,14 @@ class _GroupSelectionWidgetState extends State<GroupSelectionWidget> {
             : DropdownButton<ParticipantGroup?>(
                 //controller: controller,
 
-                value: (selectedGroup == null) ? value.firstGroup : selectedGroup,
+                value:
+                    (selectedGroup == null) ? value.firstGroup : selectedGroup,
                 onChanged: onChanged,
                 //initialSelection: groupList.isEmpty ? null : groupList[0],
                 items: [
                     ...groupList.map(
                       (group) => DropdownMenuItem<ParticipantGroup?>(
-                          child: Text(group.groupName), value: group),
+                          value: group, child: Text(group.groupName)),
                     ),
                     DropdownMenuItem<ParticipantGroup?>(
                       value: null,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:taf/participant/models/participant.dart';
 import 'package:taf/participant/models/participant_group.dart';
+import 'package:taf/test/sprint/view/sprint_participant_list.dart';
+import 'package:taf/test/sprint/view/sprint_participant_tile.dart';
 import 'package:taf/test/sprint/view/sprint_stat_widget.dart';
 import 'package:taf/test/sprint/view/sprint_timer.dart';
 import 'package:taf/test/view/group_selection_widget.dart';
@@ -13,6 +16,8 @@ class SprintTab extends StatefulWidget {
 
 class _SprintTabState extends State<SprintTab> {
   ParticipantGroup? selectedGroup;
+
+  bool get groupSelected => selectedGroup != null;
 
   void onGroupSelection(ParticipantGroup? group) {
     setState(() {
@@ -36,7 +41,8 @@ class _SprintTabState extends State<SprintTab> {
               SprintTimer(),
             ],
           ),
-        GroupSelectionWidget(onGroupSelec: onGroupSelection),
+          GroupSelectionWidget(onGroupSelect: onGroupSelection),
+          if (groupSelected) Expanded(child: SprintParticipantList(selectedGroup!)),
         ],
       ),
     );
