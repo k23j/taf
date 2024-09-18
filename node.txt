@@ -1,0 +1,12 @@
+
+
+Most likely this is caused by curl not being able to use certificates for https urls (verify with curl $NVM_NODEJS_ORG_MIRROR). Instead of using the http url as workaround, it is better to fix curl by pointing it to the appropriate CA bundle (source1, source2). Add the following line to your .bashrc:
+
+    Ubuntu (assuming you have the ca-certificates package installed)
+
+    export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+    RHEL 7
+
+    export CURL_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
+
