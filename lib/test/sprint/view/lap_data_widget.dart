@@ -19,7 +19,7 @@ class LapDataWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,      
             children: [
-              Text('Inicio: ${formatDate(data.beginOn)}', style: Theme.of(context).textTheme.bodySmall),
+              Text('Início: ${formatDate(data.beginOn)}', style: Theme.of(context).textTheme.bodySmall),
               Text('Término: ${formatDate(data.endOn)}', style: Theme.of(context).textTheme.bodySmall),
               Text('Duração: ${formatDurationLabeled(data.duration)}', style: Theme.of(context).textTheme.bodySmall),
             ],

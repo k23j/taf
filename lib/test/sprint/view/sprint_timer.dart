@@ -60,8 +60,8 @@ class _SprintTimerState extends State<SprintTimer>
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (widget.controler.onGoing) Text('Começou em: ${formatDate(widget.controler.beginOn)}'),
-        Text(formatDurationDetailed(elapsedTime)),
+        if (widget.controler.onGoing) Text('Início em   ${formatDate(widget.controler.beginOn)}'),
+        if (widget.controler.onGoing) Text(formatDurationDetailed(elapsedTime)),
         // IconButton(onPressed: startStopTest, icon: Icon(Icons.play_arrow),),
         TextButton.icon(
           iconAlignment: IconAlignment.end,
