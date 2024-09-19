@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:taf/test/commom/timer_controller.dart';
+import 'package:taf/utils/date_formatter.dart';
+import 'package:taf/utils/duration_formatter.dart';
 
 class SprintTimer extends StatefulWidget {
-  const SprintTimer({super.key});
+  const SprintTimer({required this.controler, super.key});
+
+  final TimerController controler;
 
   @override
   State<SprintTimer> createState() => _SprintTimerState();
@@ -24,14 +29,19 @@ class _SprintTimerState extends State<SprintTimer>
   }
 
   void startStopTest() {
+    //Cancel
     if (running) {
+      widget.controler.stop();
+      ticker.stop();
       setState(() {
-        ticker.stop();
         running = !running;
       });
-    } else {
+    } 
+    //Start
+    else {
+      widget.controler.start();
+      ticker.start();
       setState(() {
-        ticker.start();
         running = !running;
       });
     }
@@ -43,17 +53,6 @@ class _SprintTimerState extends State<SprintTimer>
     });
   }
 
-  String durationToString(Duration duration) {
-    int minutes = duration.inMinutes;
-    int seconds = duration.inSeconds % 60;
-    int milliseconds = duration.inMilliseconds % 1000 ~/ 10;
-
-    return '${_twoDigits(minutes)}:${_twoDigits(seconds)}.${_threeDigits(milliseconds)}';
-  }
-
-  String _twoDigits(int number) => number.toString().padLeft(2, '0');
-  String _threeDigits(int number) => number.toString().padLeft(3, '0');
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -61,7 +60,8 @@ class _SprintTimerState extends State<SprintTimer>
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(durationToString(elapsedTime)),
+        if (widget.controler.onGoing) Text('Começou em: ${formatDate(widget.controler.beginOn)}'),
+        Text(formatDurationDetailed(elapsedTime)),
         // IconButton(onPressed: startStopTest, icon: Icon(Icons.play_arrow),),
         TextButton.icon(
           iconAlignment: IconAlignment.end,

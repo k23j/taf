@@ -1,4 +1,5 @@
 import 'package:taf/participant/models/participant.dart';
+import 'package:taf/test/sprint/models/lap_data.dart';
 import 'package:taf/test/sprint/models/sprint_course.dart';
 
 class SprintParticipantData {
@@ -17,19 +18,21 @@ class SprintParticipantData {
   late final Duration duration;
   late final double grade;
 
-  int currentLap = 0;
+  int get currentLapId => lapDataList.length - 1;
+  int currentLapNumber = 0;
 
   List<LapData> lapDataList = [];
 
   void addLap(DateTime beginOn) {
-    lapDataList.add(LapData(beginOn));
+    currentLapNumber++;
+    lapDataList.add(LapData(DateTime.now(), currentLapNumber));
   }
 
   void endLap(DateTime endOn) {
-    lapDataList[currentLap].endLap(endOn);
+    lapDataList[currentLapId].endLap(endOn);
 
     //If the last lap is finished
-    if (course.lapCount == currentLap) {
+    if (course.lapCount == currentLapNumber) {
       endSprint(endOn);
       return;
     }
@@ -38,19 +41,6 @@ class SprintParticipantData {
   }
 
   void endSprint(DateTime endOn) {
-    this.endOn = endOn;
-    duration = endOn.difference(beginOn);
-  }
-}
-
-class LapData {
-  final DateTime beginOn;
-  late final DateTime endOn;
-  late final Duration duration;
-
-  LapData(this.beginOn);
-
-  void endLap(DateTime endOn) {
     this.endOn = endOn;
     duration = endOn.difference(beginOn);
   }
