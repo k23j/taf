@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:taf/participant/models/participant.dart';
 import 'package:taf/test/commom/timer_controller.dart';
 import 'package:taf/test/sprint/data/pace_enum.dart';
-import 'package:taf/test/sprint/models/lap_data.dart';
 import 'package:taf/test/sprint/models/sprint_course.dart';
 import 'package:taf/test/sprint/models/sprint_participant_data.dart';
 import 'package:taf/test/sprint/view/lap_data_widget.dart';

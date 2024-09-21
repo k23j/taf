@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taf/notifier/fab_notifier.dart';
 import 'package:taf/participant/models/participant_group.dart';
 import 'package:taf/test/commom/timer_controller.dart';
 import 'package:taf/test/sprint/data/default_sprint_course.dart';
@@ -8,7 +9,8 @@ import 'package:taf/test/sprint/view/sprint_timer.dart';
 import 'package:taf/test/view/group_selection_widget.dart';
 
 class SprintTab extends StatefulWidget {
-  const SprintTab({super.key});
+  final FABNotifier fabNotifier;
+  const SprintTab({required this.fabNotifier, super.key});
 
   @override
   State<SprintTab> createState() => _SprintTabState();
@@ -18,12 +20,19 @@ class _SprintTabState extends State<SprintTab> {
   ParticipantGroup? selectedGroup;
   TimerController timerController = TimerController();
 
-  bool get groupSelected => selectedGroup != null;
+  bool get isGroupSelected => selectedGroup != null;
 
   void onGroupSelection(ParticipantGroup? group) {
     setState(() {
       selectedGroup = group;
     });
+
+    setFabTafState(isGroupSelected);
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -45,18 +54,29 @@ class _SprintTabState extends State<SprintTab> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SprintStatWidget(),
-              SprintTimer(controler: timerController,),
+              SprintTimer(
+                controler: timerController,
+                fabNotifier: widget.fabNotifier,
+              ),
             ],
           ),
           ListenableBuilder(
             listenable: timerController.stateNotifier,
             builder: (context, child) {
-              return IgnorePointer(ignoring: timerController.stateNotifier.value != TimerStateEnum.stop,child: child!);
+              return IgnorePointer(
+                  ignoring: timerController.stateNotifier.value !=
+                      TimerStateEnum.stop,
+                  child: child!);
             },
             child: GroupSelectionWidget(onGroupSelect: onGroupSelection),
           ),
-          if (groupSelected)
-            Expanded(child: SprintParticipantList(group: selectedGroup!, course: standardSprintCourse, timerController: timerController,)),
+          if (isGroupSelected)
+            Expanded(
+                child: SprintParticipantList(
+              group: selectedGroup!,
+              course: standardSprintCourse,
+              timerController: timerController,
+            )),
         ],
       ),
     );
