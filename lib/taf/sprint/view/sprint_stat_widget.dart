@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taf/test/sprint/models/sprint_stat.dart';
+import 'package:taf/taf/sprint/models/sprint_stat.dart';
 
 class SprintStatWidget extends StatefulWidget {
   const SprintStatWidget({super.key});

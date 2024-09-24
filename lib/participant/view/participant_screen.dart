@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:taf/notifier/fab_notifier.dart';
+import 'package:taf/notifier/dynamic_fab/dynamic_fab_data.dart';
+import 'package:taf/notifier/dynamic_fab/fab_mixin.dart';
+import 'package:taf/notifier/dynamic_fab/fab_notifier.dart';
 import 'package:taf/participant/models/participant.dart';
 import 'package:taf/participant/data/participant_list.dart';
 import 'package:taf/participant/view/new_participant_screen.dart';
 import 'package:taf/participant/view/participant_list_tile.dart';
 
 class ParticipantScreen extends StatefulWidget {
-  final FABNotifier fabNotifier;
-  const ParticipantScreen({required this.fabNotifier, super.key});
+  const ParticipantScreen({super.key});
 
   @override
-  State<ParticipantScreen> createState() => _ParticipantScreenState();
+  State<ParticipantScreen> createState() => ParticipantScreenState();
 }
 
-class _ParticipantScreenState extends State<ParticipantScreen> {
+class ParticipantScreenState extends State<ParticipantScreen> with FABMixin {
+
   @override
   void initState() {
-    widget.fabNotifier.addListener(onFabPressed);
+    initFabMixin(DynamicFabData(icon: Icons.groups));
     super.initState();
   }
 
+  @override
   void onFabPressed() {
-
+    print('testInsideParticipant');
+    super.onFabPressed();
   }
 
   void addParticipant() async {

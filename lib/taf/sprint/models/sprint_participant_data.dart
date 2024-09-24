@@ -1,6 +1,6 @@
 import 'package:taf/participant/models/participant.dart';
-import 'package:taf/test/sprint/models/lap_data.dart';
-import 'package:taf/test/sprint/models/sprint_course.dart';
+import 'package:taf/taf/sprint/models/lap_data.dart';
+import 'package:taf/taf/sprint/models/sprint_course.dart';
 
 class SprintParticipantData {
   final Participant participant;
