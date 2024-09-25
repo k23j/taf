@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-
-bool fabTafState = false;
-ValueNotifier<bool> fabStateNotifier = ValueNotifier<bool>(fabTafState);
-
-void setFabTafState(bool b) {
-  fabTafState = b;
-    fabStateNotifier.value = fabTafState;
-}
-
-ValueNotifier<IconData> fabIconNotifier =
-    ValueNotifier<IconData>(Icons.play_arrow);
+import 'package:taf/fab/fab_data.dart';
 
 class FABNotifier extends ChangeNotifier {
-  void fabPressed() {
+  FABData? data;
+
+  void setData(FABData fabData) {
+    data = fabData;
     notifyListeners();
+  }
+
+  void disable() {
+    data = null;
+    notifyListeners();
+  }
+
+  void fabPressed() {
+    if (data != null) {data!.onPressed();}
   }
 }

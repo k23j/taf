@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:taf/fab/fab_data.dart';
+import 'package:taf/fab/on_active_mixin.dart';
 import 'package:taf/notifier/fab_notifier.dart';
 import 'package:taf/participant/data/participant_group_list.dart';
 import 'package:taf/participant/models/participant_group.dart';
@@ -7,24 +9,31 @@ import 'package:taf/participant/view/new_participant_group_screen.dart';
 import 'package:taf/participant/view/participant_group_list_tile.dart';
 
 class ParticipantGroupScreen extends StatefulWidget {
-  final FABNotifier fabNotifier;
-  const ParticipantGroupScreen({required this.fabNotifier, super.key});
+  const ParticipantGroupScreen({super.key});
 
   @override
-  State<ParticipantGroupScreen> createState() => _ParticipantScreenState();
+  State<ParticipantGroupScreen> createState() => _ParticipantGroupScreenState();
 }
 
-class _ParticipantScreenState extends State<ParticipantGroupScreen> {
+class _ParticipantGroupScreenState extends State<ParticipantGroupScreen>
+    with OnActiveMixin {
+  late final FABData fabData;
+
   @override
   void initState() {
-    widget.fabNotifier.addListener(onFabPressed);
+    fabData = FABData(icon: Icons.groups, onPressed: onFabPressed);
     super.initState();
   }
 
   void onFabPressed() {
-
+    print('FabPressedOnPGroup');
   }
-  
+
+  @override
+  void onBecomeActive() {
+    context.read<FABNotifier>().setData(fabData);
+  }
+
   void addGroup() async {
     await Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => const NewParticipantGroupScreen(),

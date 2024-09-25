@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:taf/fab/fab_data.dart';
+import 'package:taf/fab/on_active_mixin.dart';
 import 'package:taf/notifier/fab_notifier.dart';
 import 'package:taf/participant/models/participant.dart';
 import 'package:taf/participant/data/participant_list.dart';
@@ -6,22 +9,29 @@ import 'package:taf/participant/view/new_participant_screen.dart';
 import 'package:taf/participant/view/participant_list_tile.dart';
 
 class ParticipantScreen extends StatefulWidget {
-  final FABNotifier fabNotifier;
-  const ParticipantScreen({required this.fabNotifier, super.key});
+  const ParticipantScreen({super.key});
 
   @override
   State<ParticipantScreen> createState() => _ParticipantScreenState();
 }
 
-class _ParticipantScreenState extends State<ParticipantScreen> {
+class _ParticipantScreenState extends State<ParticipantScreen>
+    with OnActiveMixin {
+  late final FABData fabData;
+
   @override
   void initState() {
-    widget.fabNotifier.addListener(onFabPressed);
+    fabData = FABData(icon: Icons.person, onPressed: onFabPressed);
     super.initState();
   }
 
-  void onFabPressed() {
+  @override
+  void onBecomeActive() {
+    context.read<FABNotifier>().setData(fabData);
+  }
 
+  void onFabPressed() {
+    print('FabPressedOnPScreen');
   }
 
   void addParticipant() async {

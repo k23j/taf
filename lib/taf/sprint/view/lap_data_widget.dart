@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taf/test/sprint/data/pace_enum.dart';
-import 'package:taf/test/sprint/models/lap_data.dart';
+import 'package:taf/taf/sprint/data/pace_enum.dart';
+import 'package:taf/taf/sprint/models/lap_data.dart';
 import 'package:taf/utils/date_formatter.dart';
 import 'package:taf/utils/duration_formatter.dart';
 

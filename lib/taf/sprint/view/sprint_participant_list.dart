@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:taf/participant/models/participant_group.dart';
-import 'package:taf/test/commom/timer_controller.dart';
-import 'package:taf/test/sprint/models/sprint_course.dart';
-import 'package:taf/test/sprint/view/sprint_participant_tile.dart';
+import 'package:taf/taf/commom/timer_controller.dart';
+import 'package:taf/taf/sprint/models/sprint_course.dart';
+import 'package:taf/taf/sprint/view/sprint_participant_tile.dart';
 
 class SprintParticipantList extends StatelessWidget {
   final ParticipantGroup group;

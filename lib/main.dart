@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:taf/home_screen.dart';
+import 'package:taf/notifier/fab_notifier.dart';
 import 'package:taf/participant/data/participant_group_list.dart';
 import 'package:taf/theme.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => GroupNotifier(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => GroupNotifier(),),
+        ChangeNotifierProvider(create: (context) => FABNotifier(),),
+      ],
       child: const MainApp(),
     ),
   );
