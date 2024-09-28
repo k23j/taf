@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:taf/participant/models/gender.dart';
 import 'package:taf/participant/models/participant.dart';
+import 'package:taf/participant/models/rank.dart';
+import 'package:taf/participant/view/gender_switch.dart';
+import 'package:taf/participant/view/rank_dropdown.dart';
 
 class NewParticipantScreen extends StatefulWidget {
   const NewParticipantScreen({super.key});
@@ -10,7 +14,24 @@ class NewParticipantScreen extends StatefulWidget {
 
 class _NewParticipantScreenState extends State<NewParticipantScreen> {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController(text: 'Participante ');
+  final TextEditingController nameController =
+      TextEditingController(text: 'Participante ');
+
+  Gender selectedGender = Gender.m;
+  void onGenderChange(Gender newGender) {
+    setState(() {
+      selectedGender = newGender;
+    });
+  }
+
+  Rank? selectedRank;
+  void onRankSelected(Rank? rank) {
+    // if (rank == null) {
+    //   return;
+    // }
+
+    selectedRank = rank;
+  }
 
   void cancel() {
     Navigator.of(context).pop(null);
@@ -20,8 +41,14 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
     if (formKey.currentState == null) {
       return;
     }
-    if (formKey.currentState!.validate()) {
-      Navigator.of(context).pop<Participant>(Participant(nameController.text));
+    if (formKey.currentState!.validate() && selectedRank != null) {
+      Navigator.of(context).pop<Participant>(
+        Participant(
+          name: nameController.text,
+          gender: selectedGender,
+          rank: selectedRank!,
+        ),
+      );
     }
   }
 
@@ -48,21 +75,33 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
           child: Center(
             child: Column(
               children: [
-                TextFormField(
-                  controller: nameController,
-                  validator: (value) {
-                    //TODO: Pass this validator to a static method on the participant class
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Digite um nome!';
-                    }
-                    if (value.length < 3) {
-                      return 'Minimo de 3 caracteres!';
-                    }
-                    return null;
-                  },
-                  //initialValue: 'Participante',
-                  decoration: const InputDecoration(label: Text('Nome')),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: nameController,
+                        validator: (value) {
+                          //TODO: Pass this validator to a static method on the participant class
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Digite um nome!';
+                          }
+                          if (value.length < 3) {
+                            return 'Minimo de 3 caracteres!';
+                          }
+                          return null;
+                        },
+                        //initialValue: 'Participante',
+                        decoration: const InputDecoration(label: Text('Nome')),
+                      ),
+                    ),
+                    const SizedBox(width: 16,),
+                    RankDrowpdown(onSelected: onRankSelected),
+                  ],
                 ),
+                GenderSwitch(
+                    value: selectedGender, onGenderChange: onGenderChange),
               ],
             ),
           ),

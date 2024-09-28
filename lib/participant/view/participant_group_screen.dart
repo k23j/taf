@@ -21,7 +21,7 @@ class _ParticipantGroupScreenState extends State<ParticipantGroupScreen>
 
   @override
   void initState() {
-    fabData = FABData(icon: Icons.groups, onPressed: onFabPressed);
+    fabData = FABData(icon: Icons.group_add, onPressed: onFabPressed);
     super.initState();
   }
 

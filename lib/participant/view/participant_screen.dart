@@ -21,7 +21,7 @@ class _ParticipantScreenState extends State<ParticipantScreen>
 
   @override
   void initState() {
-    fabData = FABData(icon: Icons.person, onPressed: onFabPressed);
+    fabData = FABData(icon: Icons.person_add, onPressed: onFabPressed);
     super.initState();
   }
 
@@ -31,7 +31,7 @@ class _ParticipantScreenState extends State<ParticipantScreen>
   }
 
   void onFabPressed() {
-    print('FabPressedOnPScreen');
+    addParticipant();
   }
 
   void addParticipant() async {

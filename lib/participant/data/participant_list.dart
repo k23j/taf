@@ -1,9 +1,11 @@
+import 'package:taf/participant/models/gender.dart';
 import 'package:taf/participant/models/participant.dart';
+import 'package:taf/participant/models/rank.dart';
 
 List<Participant> participantList = [
-  const Participant('Participante 1'),
-  const Participant('Participante 2'),
-  const Participant('Participante 3'),
-  const Participant('Participante 4'),
-  const Participant('Participante 5'),
+  const Participant(name: 'Participante 1', gender: Gender.m, rank: Rank.cb),
+  const Participant(name: 'Participante 2', gender: Gender.m, rank: Rank.cb),
+  const Participant(name: 'Participante 3', gender: Gender.m, rank: Rank.cb),
+  const Participant(name: 'Participante 4', gender: Gender.m, rank: Rank.cb),
+  const Participant(name: 'Participante 5', gender: Gender.m, rank: Rank.cb),
 ];

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:taf/notifier/fab_notifier.dart';
 import 'package:taf/taf/commom/timer_controller.dart';
 import 'package:taf/utils/date_formatter.dart';
 import 'package:taf/utils/duration_formatter.dart';
