@@ -44,7 +44,7 @@ class _SprintTabState extends State<SprintTab> with OnActiveMixin {
   }
 
   void onFabPressed() {
-
+    timerController.start();
   }
 
   @override

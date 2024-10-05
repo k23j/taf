@@ -10,13 +10,17 @@ class SprintParticipantList extends StatelessWidget {
   final TimerController timerController;
 
   const SprintParticipantList(
-      {required this.group, required this.course, required this.timerController, super.key});
+      {required this.group,
+      required this.course,
+      required this.timerController,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: group.length,
       itemBuilder: (context, index) => SprintParticipantTile(
+        participantNumber: index + 1,
         participant: group.subjectList[index],
         course: course,
         timerController: timerController,
