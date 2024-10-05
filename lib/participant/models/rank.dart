@@ -1,10 +1,10 @@
 enum Rank {
-  mn(name: "Marinheiro", abbr: "Mn", ant: 11),
-  cb(name: "Cabo", abbr: "Cb", ant: 21),
-  sg(name: "Sargento", abbr: "Sg", ant: 30),
-  sg_3(name: "3º Sargento", abbr: "3Sg", ant: 31),  
-  sg_2(name: "2º Sargento", abbr: "2Sg", ant: 32),  
-  sg_1(name: "1º Sargento", abbr: "1Sg", ant: 33), 
+  mn(name: "Marinheiro", abbr: "MN", ant: 11),
+  cb(name: "Cabo", abbr: "CB", ant: 21),
+  sg(name: "Sargento", abbr: "SG", ant: 30),
+  sg_3(name: "3º Sargento", abbr: "3SG", ant: 31),
+  sg_2(name: "2º Sargento", abbr: "2SG", ant: 32),
+  sg_1(name: "1º Sargento", abbr: "1SG", ant: 33),
   so(name: "Suboficial", abbr: "SO", ant: 41, tags: ['Sub']),
   t(name: "Tenente", abbr: "Ten", ant: 50),
   t_2(name: "2º Tenente", abbr: "2T", ant: 51),
@@ -14,22 +14,22 @@ enum Rank {
   cc(name: "Capitão-de-Corveta", abbr: "CC", ant: 61),
   cf(name: "Capitão-de-Fragata", abbr: "CF", ant: 62),
   cmg(name: "Capitão-de-Mar-e-Guerra", abbr: "CMG", ant: 63),
-  alt(name: "Almirante", abbr: "Alt", ant: 70);
-  
+  alt(name: "Almirante", abbr: "ALT", ant: 70);
+
   final List<String> tags;
   final String name;
   final String abbr;
   final int ant;
-  
-  const Rank({
-    this.tags = const [],
-    required this.name,
-    required this.abbr,
-    required this.ant
-    }) :  type = ant >= 50 ? RankType.Of : RankType.Pr,
-          isGeneric = ant % 10 == 0,
-          isSpecific = ant % 10 != 0;
-  
+
+  const Rank(
+      {this.tags = const [],
+      required this.name,
+      required this.abbr,
+      required this.ant})
+      : type = ant >= 50 ? RankType.Of : RankType.Pr,
+        isGeneric = ant % 10 == 0,
+        isSpecific = ant % 10 != 0;
+
   final RankType type;
   final bool isGeneric;
   final bool isSpecific;
@@ -38,11 +38,10 @@ enum Rank {
 }
 
 enum RankType {
-  Of('Oficial', 'Of'), 
+  Of('Oficial', 'Of'),
   Pr('Praça', 'Pr');
 
-
-  const RankType(this.name,this.abbr);
+  const RankType(this.name, this.abbr);
 
   final String name;
   final String abbr;

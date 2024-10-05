@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-ThemeData customTheme = ThemeData.light();
+const Color seedColor = Color.fromRGBO(13, 71, 161, 1);
 
+ThemeData customTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: seedColor),
+  useMaterial3: true, // optional, for Material 3 design
+);
 
-// ThemeData customTheme = ThemeData.from(
-//     colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan[900]!));
-
-
-ThemeData customThemeDark = ThemeData.dark();
+ThemeData customThemeDark = ThemeData(
+  colorScheme:
+      ColorScheme.fromSeed(seedColor: seedColor, brightness: Brightness.dark),
+);

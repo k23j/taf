@@ -107,18 +107,20 @@ class _SprintParticipantTileState extends State<SprintParticipantTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        color: Theme.of(context).colorScheme.surface,
+        //color: Theme.of(context).colorScheme.surface,
         child: Padding(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Row(children: [
-                CircleAvatar(child: Text(widget.participantNumber.toString())),
-                SizedBox(width: 8),
+                CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                    child: Text(widget.participantNumber.toString())),
+                const SizedBox(width: 8),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Text(widget.participant.toString()),
-                  Text(widget.participant.nipString()),
+                  Text(widget.participant.nip),
                 ]),
-                Spacer(),
+                const Spacer(),
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
                   Text('Volta $currentLap/${widget.course.lapCount}'),
                   ListenableBuilder(
@@ -133,15 +135,18 @@ class _SprintParticipantTileState extends State<SprintParticipantTile> {
                     },
                   ),
                 ]),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 pace.icon,
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 IconButton.filledTonal(
-                  icon: Icon(Icons.flag),
+                  style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(
+                          Theme.of(context).colorScheme.onSecondary)),
+                  icon: const Icon(Icons.flag_outlined),
                   onPressed: completeLap,
                 ),
               ]),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               LapTimeGroup(
                   widget.course.lapCount, participantData?.lapDataList),
             ])));
@@ -178,9 +183,9 @@ class LapTimeGroup extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.onSecondary,
-            borderRadius: BorderRadius.all(Radius.circular(6))),
+            borderRadius: const BorderRadius.all(Radius.circular(6))),
         child: Padding(
-            padding: EdgeInsets.all(4),
+            padding: const EdgeInsets.all(4),
             child: Row(mainAxisSize: MainAxisSize.max, children: lapTimeList)));
   }
 }

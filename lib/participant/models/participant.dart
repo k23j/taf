@@ -6,17 +6,28 @@ class Participant {
   final String name;
   final Gender gender;
   final Rank rank;
-  final int? nip;
+  final String nip;
 
   const Participant(
-      {required this.name, required this.gender, required this.rank, this.nip});
+      {required this.name,
+      required this.gender,
+      required this.rank,
+      required this.nip});
 
   @override
   String toString() {
-    return '${rank.abbr}-$name';
+    return '${rank.abbr} - $name';
   }
 
-  String nipString() {
-    return nip?.toString() ?? '-';
+  @override
+  bool operator ==(Object other) {
+    if ((other is! Participant)) {
+      return false;
+    }
+
+    return nip == other.nip;
   }
+
+  @override
+  int get hashCode => nip.hashCode;
 }

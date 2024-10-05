@@ -16,6 +16,7 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController =
       TextEditingController(text: 'Participante ');
+  final TextEditingController nipController = TextEditingController();
 
   Gender selectedGender = Gender.m;
   void onGenderChange(Gender newGender) {
@@ -33,6 +34,11 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
     selectedRank = rank;
   }
 
+  bool containsOnlyNumbers(String input) {
+    final RegExp regex = RegExp(r'^\d+$');
+    return regex.hasMatch(input);
+  }
+
   void cancel() {
     Navigator.of(context).pop(null);
   }
@@ -44,6 +50,7 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
     if (formKey.currentState!.validate() && selectedRank != null) {
       Navigator.of(context).pop<Participant>(
         Participant(
+          nip: nipController.text,
           name: nameController.text,
           gender: selectedGender,
           rank: selectedRank!,
@@ -96,12 +103,33 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
                         decoration: const InputDecoration(label: Text('Nome')),
                       ),
                     ),
-                    const SizedBox(width: 16,),
+                    const SizedBox(
+                      width: 16,
+                    ),
                     RankDrowpdown(onSelected: onRankSelected),
                   ],
                 ),
                 GenderSwitch(
                     value: selectedGender, onGenderChange: onGenderChange),
+                TextFormField(
+                  controller: nipController,
+                  validator: (value) {
+                    //TODO: Pass this validator to a static method on the participant class
+                    //TODO: This needs to check if the entered NIP is unique
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Digite o NIP.';
+                    }
+                    if (value.length == 8) {
+                      return 'Número de caracteres inválido.';
+                    }
+                    if (!containsOnlyNumbers(value.trim())) {
+                      return 'Use apenas números.';
+                    }
+                    return null;
+                  },
+                  //initialValue: 'Participante',
+                  decoration: const InputDecoration(label: Text('NIP')),
+                ),
               ],
             ),
           ),
