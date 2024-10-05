@@ -107,7 +107,6 @@ class _SprintParticipantTileState extends State<SprintParticipantTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        //color: Theme.of(context).colorScheme.surface,
         child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -173,7 +172,10 @@ class LapTimeGroup extends StatelessWidget {
       if (index % 2 == 0) {
         return lapTimeList[lapTimeWidgetId++];
       } else {
-        return Text('|');
+        return VerticalDivider(
+          color: Colors.grey,
+          // thickness: 2,
+        ); //Text('|');
       }
     });
   }
@@ -186,7 +188,9 @@ class LapTimeGroup extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(6))),
         child: Padding(
             padding: const EdgeInsets.all(4),
-            child: Row(mainAxisSize: MainAxisSize.max, children: lapTimeList)));
+            child: IntrinsicHeight(
+                child: Row(
+                    mainAxisSize: MainAxisSize.min, children: lapTimeList))));
   }
 }
 

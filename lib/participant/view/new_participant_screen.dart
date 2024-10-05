@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masked_text/masked_text.dart';
 import 'package:taf/participant/models/gender.dart';
 import 'package:taf/participant/models/participant.dart';
 import 'package:taf/participant/models/rank.dart';
@@ -35,7 +36,8 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
   }
 
   bool containsOnlyNumbers(String input) {
-    final RegExp regex = RegExp(r'^\d+$');
+    //final RegExp regex = RegExp(r'^\d+$');
+    final RegExp regex = RegExp(r'^\d{2}\.\d{4}\.\d{2}$');
     return regex.hasMatch(input);
   }
 
@@ -111,8 +113,11 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
                 ),
                 GenderSwitch(
                     value: selectedGender, onGenderChange: onGenderChange),
-                TextFormField(
+                MaskedTextField(
                   controller: nipController,
+                  mask: "##.####.##",
+                  maxLength: 10,
+                  decoration: const InputDecoration(label: Text('NIP')),
                   validator: (value) {
                     //TODO: Pass this validator to a static method on the participant class
                     //TODO: This needs to check if the entered NIP is unique
@@ -127,8 +132,6 @@ class _NewParticipantScreenState extends State<NewParticipantScreen> {
                     }
                     return null;
                   },
-                  //initialValue: 'Participante',
-                  decoration: const InputDecoration(label: Text('NIP')),
                 ),
               ],
             ),

@@ -20,7 +20,8 @@ class ParticipantDetailsScreen extends StatelessWidget {
           Text('Nome: ${data.name}'),
           Text('Post/Grad: ${data.rank.name}'),
           Text('Gênero: ${data.gender.gender}'),
-          ],
+          Text('NIP: ${data.nip}'),
+        ],
       ),
     );
   }

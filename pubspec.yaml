@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  masked_text: ^1.1.2
   provider: ^6.1.2
 
 dev_dependencies:

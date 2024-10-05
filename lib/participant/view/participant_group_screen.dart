@@ -26,7 +26,7 @@ class _ParticipantGroupScreenState extends State<ParticipantGroupScreen>
   }
 
   void onFabPressed() {
-    print('FabPressedOnPGroup');
+    addGroup();
   }
 
   @override
@@ -56,11 +56,6 @@ class _ParticipantGroupScreenState extends State<ParticipantGroupScreen>
                 ParticipantGroupListTile(groupList[index]),
           );
         },
-        // child: ListView.builder(
-        //   itemCount: groupList.length,
-        //   itemBuilder: (context, index) =>
-        //       ParticipantGroupListTile(groupList[index]),
-        // ),
       ),
     );
   }
